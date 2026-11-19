@@ -1,0 +1,46 @@
+name: selfcheck
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  selfcheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install self-check dependencies
+        run: python -m pip install -r selfcheck/requirements.txt
+
+      - name: Check repository hygiene
+        run: python selfcheck/repo_hygiene.py .
+
+      - name: Check services are implemented
+        id: services
+        shell: bash
+        run: |
+          if [ -f services/ipr/Dockerfile ] \
+            && [ -f services/vlp/Dockerfile ] \
+            && [ -f services/nodal/Dockerfile ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Сервисы ещё не реализованы: добавьте Dockerfile в services/ipr, services/vlp и services/nodal."
+          fi
+
+      - name: Run public JSON checks
+        if: steps.services.outputs.ready == 'true'
+        run: python -m pytest selfcheck/tests -v --compose-file docker-compose.yml
+
+      - name: Stop stack
+        if: always()
+        run: docker compose -f docker-compose.yml -p wmb-selfcheck down -v --remove-orphans || true

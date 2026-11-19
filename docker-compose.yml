@@ -1,0 +1,48 @@
+services:
+  vlp:
+    build:
+      context: ./services/vlp
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    restart: "no"
+
+  ipr:
+    build:
+      context: ./services/ipr
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    restart: "no"
+
+  nodal:
+    build:
+      context: ./services/nodal
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    restart: "no"
+
+  backend:
+    profiles: ["app"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ipr
+      - vlp
+      - nodal
+    restart: "no"
+
+  frontend:
+    profiles: ["app"]
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: "no"
