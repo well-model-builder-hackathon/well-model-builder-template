@@ -79,14 +79,10 @@ def _compose_command(compose_file: Path, *args: str) -> list[str]:
 
 
 def _wait_ready(client, ipr_url, vlp_url, nodal_url, timeout: int) -> None:
-    ipr_request = load_json("ipr_request.json")
-    vlp_request = load_json("vlp_request.json")
-    nodal_request = load_json("nodal_request.json")
-
     checks = [
+        ("IPR", lambda: client.get(f"{ipr_url}/ipr/health")),
         ("VLP", lambda: client.get(f"{vlp_url}/vlp/health")),
-        ("IPR", lambda: client.post(f"{ipr_url}/ipr/calc", json=ipr_request)),
-        ("Nodal", lambda: client.post(f"{nodal_url}/nodal/calc", json=nodal_request)),
+        ("Nodal", lambda: client.get(f"{nodal_url}/nodal/health")),
     ]
 
     started = time.monotonic()

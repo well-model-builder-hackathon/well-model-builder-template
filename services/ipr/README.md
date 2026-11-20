@@ -3,8 +3,9 @@
 Реализация сервиса IPR. Положите сюда код и `Dockerfile`.
 
 - Порт: **8003**
-- Endpoint: `POST /ipr/calc`
-- Health/OpenAPI: `/docs` или `/swagger-ui`
+- Расчёт: `POST /ipr/calc`
+- Health: `GET /ipr/health`
+- OpenAPI: `/docs`, `/openapi.json`
 
 Запрос:
 

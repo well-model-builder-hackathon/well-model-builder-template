@@ -2,7 +2,7 @@
 
 - `input_data.json` — общий пример кейса. Это не готовый запрос к отдельному сервису.
 - `ipr_request.json` — чистый запрос для `POST /ipr/calc`.
-- `vlp_request.json` — чистый запрос для `POST /vlp/calculator`.
+- `vlp_request.json` — чистый запрос для `POST /vlp/calc`.
 - `nodal_request.json` — пример запроса для `POST /nodal/calc` с двумя простыми кривыми.
 
 ## Как разложить общий пример

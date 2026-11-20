@@ -46,16 +46,19 @@
 
 ## Порты
 
-| Сервис | Порт | Endpoint |
-|---|---:|---|
-| VLP | 8002 | `POST /vlp/calculator`, `GET /vlp/health` |
-| IPR | 8003 | `POST /ipr/calc` |
-| Nodal | 8004 | `POST /nodal/calc` |
-| Backend | 8080 | `/health`, `/api/*` |
-| Frontend | 3000 | дашборд |
+| Сервис | Порт | Расчёт | Health |
+|---|---:|---|---|
+| VLP | 8002 | `POST /vlp/calc` | `GET /vlp/health` |
+| IPR | 8003 | `POST /ipr/calc` | `GET /ipr/health` |
+| Nodal | 8004 | `POST /nodal/calc` | `GET /nodal/health` |
+| Backend | 8080 | `/api/*` | `GET /health` |
+| Frontend | 3000 | дашборд | — |
 
 Порты 8002/8003/8004 на хосте должны быть именно такими: по ним работает `selfcheck`.
 Backend и frontend запускаются только под профилем `app`.
+
+Health у расчётных сервисов одинаковый: `GET /<service>/health` →
+`{"status": "ok", "service": "<service>"}`. OpenAPI: `/docs` и `/openapi.json`.
 
 ## Быстрый старт
 
@@ -137,7 +140,7 @@ workflow остаётся зелёным и напоминает, что реа�
 - `wct` — %;
 - `pi` — м³/сут/атм.
 
-**VLP** — `POST /vlp/calculator`:
+**VLP** — `POST /vlp/calc`:
 
 ```json
 {

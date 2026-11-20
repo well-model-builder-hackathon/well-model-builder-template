@@ -3,8 +3,9 @@
 Реализация сервиса узлового анализа. Положите сюда код и `Dockerfile`.
 
 - Порт: **8004**
-- Endpoint: `POST /nodal/calc`
-- OpenAPI: `/docs` или `/openapi.json`
+- Расчёт: `POST /nodal/calc`
+- Health: `GET /nodal/health`
+- OpenAPI: `/docs`, `/openapi.json`
 
 Nodal принимает **две готовые кривые** IPR и VLP, а не исходные данные скважины.
 Ответ — массив ровно из одной точки.

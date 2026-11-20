@@ -50,7 +50,7 @@ python -m pytest selfcheck/tests -v \
 ## Что проверяется
 
 - `POST /ipr/calc` возвращает JSON с `q_liq` и `p_wf`;
-- `POST /vlp/calculator` возвращает JSON с `q_liq` и `p_wf`;
+- `POST /vlp/calc` возвращает JSON с `q_liq` и `p_wf`;
 - `POST /nodal/calc` возвращает массив ровно из одной точки;
 - состав репозитория: `.idea`, `venv`, кэши, логи, `.env`, большие файлы
   и другие нежелательные артефакты.

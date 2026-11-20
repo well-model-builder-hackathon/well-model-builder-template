@@ -12,6 +12,20 @@
 Все ошибки валидации — HTTP 4xx и JSON-объект. Формат полей может отличаться,
 но ответ не должен быть HTML или пустым телом.
 
+У каждого расчётного сервиса одинаковый набор служебных endpoint'ов:
+
+```http
+GET /<service>/health
+```
+
+```json
+{"status": "ok", "service": "ipr"}
+```
+
+- health возвращает HTTP 200 без тела запроса и без авторизации;
+- поле `service` — `ipr`, `vlp` или `nodal`;
+- OpenAPI: `/docs` и `/openapi.json`.
+
 ---
 
 ## 1. IPR
@@ -67,7 +81,7 @@ OpenAPI/Swagger обязателен.
 ## 2. VLP
 
 ```http
-POST /vlp/calculator
+POST /vlp/calc
 Content-Type: application/json
 ```
 
@@ -182,9 +196,9 @@ Multi-intersection в рамках хакатона не требуется и �
 Полный сценарий:
 
 ```text
-IPR request  → POST /ipr/calc       → IPR curve
-VLP request  → POST /vlp/calculator → VLP curve
-             → POST /nodal/calc     → operating point
+IPR request  → POST /ipr/calc  → IPR curve
+VLP request  → POST /vlp/calc  → VLP curve
+             → POST /nodal/calc → operating point
 ```
 
 Для кейса Petroleum Office VLP вызывается с `roughness = 0.0006`,

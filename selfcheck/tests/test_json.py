@@ -26,7 +26,7 @@ def test_ipr_returns_json_curve(client, ipr_url, ipr_request, stack):
 
 def test_vlp_returns_json_curve(client, vlp_url, vlp_request, stack):
     data = _assert_json_response(
-        client.post(f"{vlp_url}/vlp/calculator", json=vlp_request)
+        client.post(f"{vlp_url}/vlp/calc", json=vlp_request)
     )
 
     assert isinstance(data, dict)

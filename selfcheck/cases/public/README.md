@@ -3,7 +3,7 @@
 Здесь лежат только входные JSON для минимальной проверки контракта:
 
 - `ipr_request.json` — запрос к `POST /ipr/calc`;
-- `vlp_request.json` — запрос к `POST /vlp/calculator`;
+- `vlp_request.json` — запрос к `POST /vlp/calc`;
 - `nodal_request.json` — простые две кривые для `POST /nodal/calc`.
 
 Публичный selfcheck проверяет только то, что сервисы отвечают JSON нужной
